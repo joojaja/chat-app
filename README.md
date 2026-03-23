@@ -12,3 +12,14 @@ npm packages used:
 8. socket.io
 9. nodemon - dev testing
 
+Frontend:
+1. React + Vite
+2. Tailwind CSS
+3. Zustand
+4. Daisy UI
+
+Backend / API:
+1. Node.js
+2. MongoDB
+3. Express
+3. Socket.io
