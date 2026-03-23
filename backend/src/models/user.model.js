@@ -28,5 +28,6 @@ const userSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", userSchema); // name of collection + schema. user upper case first letter + singular form
+// mongoose will auto save collection name as "users" in database
 
 export default User;
