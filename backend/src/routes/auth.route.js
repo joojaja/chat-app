@@ -10,4 +10,6 @@ router.post("/logout", logout);
 
 router.put("/update-profile", protectRoute, updateProfile); // protectRoute "middleware" function to validate JWT
 
+router.get("/check", protectRoute, checkAuth); // used when refreshing page
+
 export default router;
