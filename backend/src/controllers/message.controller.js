@@ -30,3 +30,36 @@ export const getMessages = async(req, res) => {
         res.status(500).json({message: "Internal server error"});
     }
 };
+
+export const sendMessage = async(req, res) => {
+    try {
+        const {text, image} = req.body;
+        const {id:receiverId} = req.params; // get parameter id and rename to receiverId
+        const senderId = req.user._id;
+
+        // if sent a image, upload to cloudinary and save the url
+        let imageUrl;
+        if (image) {
+            // Upload image to cloudinary
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl = uploadResponse.secure_url;
+        }
+
+        const newMessage = new Message({ // create the Message object
+            senderId: senderId,
+            receiverId: receiverId,
+            text: text,
+            image: imageUrl,
+        })
+
+        await newMessage.save();
+
+        //TODO: socket.io realtime functionality
+        res.status(201).json(newMessage);
+
+    } catch (error) {
+        console.log("Error in sendMessage controller: ", error.messsage);
+        res.status(500).json({message: "Internal server error"});
+    }
+
+}
