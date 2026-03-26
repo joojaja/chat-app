@@ -1,6 +1,9 @@
 # chat-app
 Chat Application (MERN Stack + Socket.io)
 
+Credits:
+https://www.youtube.com/watch?v=ntKkVrQqBYY
+
 npm packages used: 
 1. bcryptjs - for encryption of password
 2. cloudinary
