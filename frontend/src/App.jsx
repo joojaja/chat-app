@@ -12,6 +12,7 @@ import { useAuthStore } from "./store/useAuthStore.js";
 import { useEffect } from "react";
 
 import {Loader} from "lucide-react"; // npm i lucide-react for icons
+import { Toaster } from "react-hot-toast"; // npm i react-hot-toast for toast notifications
 
 const App = () => {
   // Access authentication state from auth store (Zustand global state management)
@@ -41,6 +42,11 @@ const App = () => {
           <Route path="/settings" element={<SettingsPage />}/>
           <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
         </Routes>
+
+        <Toaster {/* Toaster plugin that displays toast notifications */}
+          position="top-center"
+          reverseOrder={false}
+        />
     </>
   );
 };
