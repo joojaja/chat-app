@@ -14,14 +14,17 @@ import { useEffect } from "react";
 import {Loader} from "lucide-react"; // npm i lucide-react for icons
 
 const App = () => {
+  // Access authentication state from auth store (Zustand global state management)
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
 
+  // Check authentication status on website load / refresh
   useEffect(() => {
-    checkAuth();
+    checkAuth(); // Call the global function initialised in useAuthStore.js
   }, [checkAuth]);
 
   console.log({authUser});
 
+  // Show a loading spinner while checking authentication status
   if (isCheckingAuth && !authUser) return (
     <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin"/>
@@ -30,8 +33,8 @@ const App = () => {
 
   return (
     <>
-      <Navbar/>
-        <Routes>
+      <Navbar/> {/* Show the navigation bar on all pages */}
+        <Routes> {/* Define routes for the application, with conditional rendering based on authentication status */}
           <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
           <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
           <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />

@@ -1,4 +1,4 @@
-import {create} from "zustand";
+import {create} from "zustand"; // importing of Zustand for global state manangement, same as Redux Toolkit
 import { axiosInstance } from "../lib/axios.js";
 
 export const useAuthStore = create((set) => ({
@@ -8,6 +8,7 @@ export const useAuthStore = create((set) => ({
     isUpdatingProfile: false,
     isCheckingAuth: true,
 
+    // Global function to check authentication status, called on website refresh or load
     checkAuth: async() => {
         try {
             const res = await axiosInstance.get("/auth/check");
