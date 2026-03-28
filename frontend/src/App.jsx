@@ -17,7 +17,7 @@ const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
 
   useEffect(() => {
-    checkAuth()
+    checkAuth();
   }, [checkAuth]);
 
   console.log({authUser});
@@ -26,7 +26,7 @@ const App = () => {
     <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin"/>
     </div>
-  )
+  );
 
   return (
     <>
