@@ -43,7 +43,7 @@ const App = () => {
           <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
         </Routes>
 
-        <Toaster {/* Toaster plugin that displays toast notifications */}
+        <Toaster /* Toaster plugin that displays toast notifications */
           position="top-center"
           reverseOrder={false}
         />
