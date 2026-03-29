@@ -33,6 +33,7 @@ export const useChatStore = create((set, get) => ({
       set({ isMessagesLoading: false });
     }
   },
+
   sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
     try {
@@ -64,5 +65,6 @@ export const useChatStore = create((set, get) => ({
     socket.off("newMessage");
   },
 
+  // when user clicks a differet user, we change the state of selectedUser, and then fetch the messages of the new user
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
