@@ -1,5 +1,6 @@
 import {create} from "zustand"; // importing of Zustand for global state manangement, same as Redux Toolkit
 import { axiosInstance } from "../lib/axios.js";
+import toast from "react-hot-toast";
 
 export const useAuthStore = create((set) => ({
     authUser: null,
