@@ -65,6 +65,6 @@ export const useChatStore = create((set, get) => ({
     socket.off("newMessage");
   },
 
-  // when user clicks a differet user, we change the state of selectedUser, and then fetch the messages of the new user
+  // when user clicks a different user, we change the state of selectedUser, and then fetch the messages of the new user
   setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));
