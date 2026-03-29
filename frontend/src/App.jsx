@@ -9,14 +9,17 @@ import Navbar from "./components/Navbar";
 
 import { axiosInstance } from "./lib/axios.js";
 import { useAuthStore } from "./store/useAuthStore.js";
-import { useEffect } from "react";
+import { useThemeStore } from "./store/useThemeStore.js";
 
+import { useEffect } from "react";
 import {Loader} from "lucide-react"; // npm i lucide-react for icons
 import { Toaster } from "react-hot-toast"; // npm i react-hot-toast for toast notifications
 
 const App = () => {
   // Access authentication state from auth store (Zustand global state management)
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
+
+  const {theme} = useThemeStore(); // Access the current theme from the theme store (Zustand global state management)
 
   // Check authentication status on website load / refresh
   useEffect(() => {
@@ -33,7 +36,7 @@ const App = () => {
   );
 
   return (
-    <>
+    <div data-theme={theme}>
       <Navbar/> {/* Show the navigation bar on all pages */}
         <Routes> {/* Define routes for the application, with conditional rendering based on authentication status */}
           <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
@@ -47,7 +50,7 @@ const App = () => {
           position="top-center"
           reverseOrder={false}
         />
-    </>
+    </div>
   );
 };
 
