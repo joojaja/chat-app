@@ -9,6 +9,8 @@ export const useAuthStore = create((set) => ({
     isUpdatingProfile: false,
     isCheckingAuth: true,
 
+    onlineUsers: [],
+
     // Global function to check authentication status, called on website refresh or load
     checkAuth: async() => {
         try {
