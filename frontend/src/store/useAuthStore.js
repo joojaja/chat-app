@@ -1,8 +1,12 @@
 import {create} from "zustand"; // importing of Zustand for global state manangement, same as Redux Toolkit
 import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
+import { io } from "socket.io-client";
 
-export const useAuthStore = create((set) => ({
+const BASE_URL = "http://localhost:5001";
+
+
+export const useAuthStore = create((set, get) => ({
     authUser: null,
     isSigningUp: false,
     isLoggingIn: false,
@@ -10,12 +14,14 @@ export const useAuthStore = create((set) => ({
     isCheckingAuth: true,
 
     onlineUsers: [],
+    socket: null,
 
     // Global function to check authentication status, called on website refresh or load
     checkAuth: async() => {
         try {
             const res = await axiosInstance.get("/auth/check");
             set({authUser: res.data});
+            get().connectSocket(); // if authenticated, connect to socket.io server for real-time functionality
         } catch (error) {
             set({authUser: null});
             console.log("Error in checkAuth: ", error);
@@ -31,7 +37,8 @@ export const useAuthStore = create((set) => ({
             const res = await axiosInstance.post("/auth/signup", data);
             set({ authUser: res.data });
             toast.success("Account created successfully");
-
+            
+            get().connectSocket(); // after signup, connect to socket.io server for real-time functionality
         } catch (error) {
             toast.error(error.response.data.message);
 
@@ -45,6 +52,7 @@ export const useAuthStore = create((set) => ({
             await axiosInstance.post("/auth/logout");
             set({authUser: null});
             toast.success("Logged out successfully");
+            get().disconnectSocket(); // disconnect from socket.io server when logged out
         } catch (error) {
             toast.error(error.response.data.message);
         }
@@ -56,6 +64,8 @@ export const useAuthStore = create((set) => ({
             const res = await axiosInstance.post("/auth/login", data);
             set({ authUser: res.data });
             toast.success("Logged in successfully");
+
+            get().connectSocket(); // after login, connect to socket.io server for real-time functionality
         } catch (error) {
             toast.error(error.response.data.message);
         } finally {
@@ -64,16 +74,40 @@ export const useAuthStore = create((set) => ({
     },
 
     updateProfile: async (data) => {
-    set({ isUpdatingProfile: true });
-    try {
-      const res = await axiosInstance.put("/auth/update-profile", data);
-      set({ authUser: res.data });
-      toast.success("Profile updated successfully");
-    } catch (error) {
-      console.log("error in update profile:", error);
-      toast.error(error.response.data.message);
-    } finally {
-      set({ isUpdatingProfile: false });
-    }
-  },
+        set({ isUpdatingProfile: true });
+        try {
+            const res = await axiosInstance.put("/auth/update-profile", data);
+            set({ authUser: res.data });
+            toast.success("Profile updated successfully");
+        } catch (error) {
+            console.log("error in update profile:", error);
+            toast.error(error.response.data.message);
+        } finally {
+            set({ isUpdatingProfile: false });
+        }
+    },
+
+    connectSocket: () => {
+        const { authUser } = get();
+        if (!authUser || get().socket?.connected) return;
+
+        const socket = io(BASE_URL, {
+            query: {
+                userId: authUser._id,
+            },
+        });
+        socket.connect();
+
+        set({ socket: socket }); // save socket instance in Zustand store to use in other components and to disconnect later
+
+        socket.on("getOnlineUsers", (userIds) => {
+            set({ onlineUsers: userIds });
+        });
+    },
+
+    disconnectSocket: () => {
+        if (get().socket?.connected) { 
+            get().socket.disconnect();
+        }
+    },
 }))
