@@ -100,7 +100,7 @@ export const useAuthStore = create((set, get) => ({
 
         set({ socket: socket }); // save socket instance in Zustand store to use in other components and to disconnect later
 
-        socket.on("getOnlineUsers", (userIds) => {
+        socket.on("getOnlineUsers", (userIds) => { // listen for "getOnlineUsers" event from socket.io server backend, which sends an array of online userIds
             set({ onlineUsers: userIds });
         });
     },
