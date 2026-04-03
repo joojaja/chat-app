@@ -55,7 +55,11 @@ export const sendMessage = async(req, res) => {
 
         await newMessage.save();
 
-        //TODO: socket.io realtime functionality
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) { // if the receiver is online, send the new message to the receiver in real-time using socket.io
+            io.to(receiverSocketId).emit("newMessage", newMessage); // "newMessage" is the event name, newMessage is the data we are sending to the receiver
+        }
+
         res.status(201).json(newMessage);
 
     } catch (error) {
