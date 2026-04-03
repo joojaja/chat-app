@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useChatStore } from '../store/useChatStore';
 import ChatHeader from './ChatHeader';
 import MessageInput from './MessageInput';
@@ -9,12 +9,19 @@ import { formatMessageTime } from "../lib/utils";
 const ChatContainer = () => {
   const {messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages} = useChatStore();
   const { authUser } = useAuthStore();
+  const messageEndRef = useRef(null); // reference to the end of the messages list for auto-scrolling
 
   useEffect(() => {
     getMessages(selectedUser._id);
     subscribeToMessages(); // subscribe to real-time messages when the component mounts or when the selected user changes
     return () => unsubscribeFromMessages(); // unsubscribe from real-time messages
   }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+
+  useEffect(() => { // scroll to the bottom of the chat when messages change
+    if (messageEndRef.current && messages) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   // loading state for messages
   if (isMessagesLoading) {
@@ -36,6 +43,7 @@ const ChatContainer = () => {
           <div
             key={message._id}
             className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"}`} // either at left side or right side depending on the sender
+            ref={messageEndRef} // auto-scroll to the latest message when a new message comes
           >
             <div className=" chat-image avatar">
               <div className="size-10 rounded-full border">
