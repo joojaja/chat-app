@@ -52,7 +52,7 @@ export const useChatStore = create((set, get) => ({
 
     socket.on("newMessage", (newMessage) => {
       const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
-      if (!isMessageSentFromSelectedUser) return;
+      if (!isMessageSentFromSelectedUser) return; // only add the new message to the state if it is sent from the currently selected user, otherwise we will have messages from other users mixed in
 
       set({
         messages: [...get().messages, newMessage], // add the new message to the existing messages in the state
