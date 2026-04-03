@@ -1,6 +1,14 @@
 # chat-app
 Chat Application (MERN Stack + Socket.io)
 
+Login Credentials:
+
+Email - john@gmail.com
+Password - 123456
+
+Email - joojaja@gmail.com
+Password - 123456
+
 Credits:
 https://www.youtube.com/watch?v=ntKkVrQqBYY
 
