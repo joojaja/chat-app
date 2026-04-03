@@ -14,7 +14,8 @@ dotenv.config();
 const PORT = process.env.PORT;
 const __dirname = path.resolve();
 
-app.use(express.json()); // allows to extract json data from request body
+app.use(express.json({limit: '10mb'})); // allows to extract json data from request body. 10mb limit for image uploads
+app.use(express.urlencoded({ extended: true, limit: '10mb' })); // 10mb limit for image uploads
 app.use(cookieParser()); // allows parsing of cookie
 app.use(cors({
     origin: "http://localhost:5173",
