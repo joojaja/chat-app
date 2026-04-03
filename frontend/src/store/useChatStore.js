@@ -44,7 +44,7 @@ export const useChatStore = create((set, get) => ({
     }
   },
 
-  subscribeToMessages: () => {
+  subscribeToMessages: () => { // subscribe to real-time messages using socket.io
     const { selectedUser } = get();
     if (!selectedUser) return;
 
@@ -55,7 +55,7 @@ export const useChatStore = create((set, get) => ({
       if (!isMessageSentFromSelectedUser) return;
 
       set({
-        messages: [...get().messages, newMessage],
+        messages: [...get().messages, newMessage], // add the new message to the existing messages in the state
       });
     });
   },
