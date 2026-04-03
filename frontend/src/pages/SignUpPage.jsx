@@ -55,7 +55,7 @@ const SignUpPage = () => {
                 <span className="label-text font-medium">Full Name</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <User className="size-5 text-base-content/40" /> {/* User logo */}
                 </div>
                 <input
@@ -74,13 +74,13 @@ const SignUpPage = () => {
                 <span className="label-text font-medium">Email</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <Mail className="size-5 text-base-content/40" /> {/* Mail logo */}
                 </div>
                 <input
                   type="email"
                   className={`input input-bordered w-full pl-10`}
-                  placeholder="example@example.com"
+                  placeholder="example@email.com"
                   value={formData.email} // the value shown on the page is taken from the state variable
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })} // whenever user types in input field, the state variable is updated
                 />
@@ -93,7 +93,7 @@ const SignUpPage = () => {
                 <span className="label-text font-medium">Password</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
                   <Lock className="size-5 text-base-content/40" /> {/* Lock logo */}
                 </div>
                 <input
