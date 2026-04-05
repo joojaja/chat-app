@@ -1,7 +1,40 @@
-# chat-app
-Chat Application (MERN Stack + Socket.io)
+# ChatBot README
+<img width="1544" height="800" alt="image" src="https://github.com/user-attachments/assets/39f8b2f4-01ac-498a-907c-fb80c76fd38d" />
+<img width="1521" height="800" alt="image" src="https://github.com/user-attachments/assets/fb32969b-38f1-4fa0-a7b7-9b1d13bb65c5" />
+<img width="1526" height="800" alt="image" src="https://github.com/user-attachments/assets/b7cb78f0-6177-4246-a8d1-1273e551e9ca" />
 
-Login Credentials:
+
+
+## ChatBot
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,tailwind,mongodb,express,nodejs)](https://skillicons.dev)
+
+ChatBot is a bidirectional real-time chat messaging application built with MERN Stack + Socket.io
+
+Tech stack used:
+1. MongoDB
+2. Express
+3. React (Zustand)
+4. Node.js
+5. Tailwind CSS
+6. Socket.io
+7. Daisy UI
+
+## What I learnt
+- How to use WebSockets and its ability to provide a duplex data transfer between client and browser (Socket.io)
+- React state mangement with Zustand
+
+## Features
+- Login & Register (JWT Authenticaton)
+- Editing of Profile Picture (Profile Page)
+- Changing of Chat Colour Theme (Settings Page)
+- Real-time Chat Messaging (Text & Images)
+
+## Launching ChatBot
+### Web Deployment
+Website deployed on Render
+[https://chat-app-u1lc.onrender.com/](https://chat-app-u1lc.onrender.com/)
+
+**Login Credentials:**
 
 Email - john@gmail.com
 Password - 123456
@@ -9,28 +42,16 @@ Password - 123456
 Email - joojaja@gmail.com
 Password - 123456
 
-Credits:
-https://www.youtube.com/watch?v=ntKkVrQqBYY
+### Manual Deployment
+```bash
+cd backend  
+npm install  
+npm run dev
 
-npm packages used: 
-1. bcryptjs - for encryption of password
-2. cloudinary
-3. cookie-parser
-4. dotenv
-5. express
-6. jsonwebtoken - generating of JWT
-7. mongoose - to connect to MongoDB
-8. socket.io
-9. nodemon - dev testing
+cd frontend
+npm install
+npm run dev  
+```
 
-Frontend:
-1. React + Vite
-2. Tailwind CSS
-3. Zustand
-4. Daisy UI
-
-Backend / API:
-1. Node.js
-2. MongoDB
-3. Express
-3. Socket.io
+### Credits:
+[https://www.youtube.com/watch?v=ntKkVrQqBYY](https://www.youtube.com/watch?v=ntKkVrQqBYY)
