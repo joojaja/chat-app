@@ -43,6 +43,22 @@ Email - joojaja@gmail.com
 Password - 123456
 
 ### Manual Deployment
+
+.env file in /backend
+> MONGODB_URI= from mongoDB cloud
+> 
+> PORT=5001
+> 
+> JWT_SECRET=anystring
+> 
+> NODE_ENV=development
+> 
+> CLOUDINARY_CLOUD_NAME=from cloudinary
+> 
+> CLOUDINARY_API_KEY=from cloudinary
+> 
+> CLOUDINARY_API_SECRET=from cloudinary
+
 ```bash
 cd backend  
 npm install  
